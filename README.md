@@ -1,18 +1,16 @@
+# PatternDispatch.jl
+
 To install, simply type
 ```
 ] add https://github.com/MasonProtter/PatternDispatch.jl.git
 ```
-or
-```julia
-using Pkg; pkg"add https://github.com/MasonProtter/PatternDispatch.jl.git"
-```
 at the julia REPL.
 
-# PatternDispatch.jl
+__________
+
 
 PatternDispatch.jl offers pattern matching through [Rematch.jl](https://github.com/RelationalAI-oss/Rematch.jl) but with
 extensible, multiple-dispatch like semantics.
-
 ```julia
 using PatternDispatch
 @pattern fib(x) = fib(x-1) + fib(x-2)
