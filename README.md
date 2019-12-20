@@ -12,7 +12,6 @@ using PatternDispatch
 ```julia
 julia> fib(10)
 55
-end
 ```
 Any valid Rematch.jl pattern can be used in a `@pattern` function signature, so you can write powerful destructuring code like
 ```julia
