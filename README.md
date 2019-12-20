@@ -1,6 +1,6 @@
 # PatternDispatch.jl
 
-PatternDispatch.jk offers pattern matching through [Rematch.jl](https://github.com/RelationalAI-oss/Rematch.jl) but with
+PatternDispatch.jl offers pattern matching through [Rematch.jl](https://github.com/RelationalAI-oss/Rematch.jl) but with
 extensible, multiple-dispatch like semantics.
 
 ```julia
@@ -45,7 +45,7 @@ Pattern 'methods' are dispatched on in order of their specificity, so completely
 `@pattern f(x)` have the lowest precedence whereas exact value patterns like `@pattern f(1)` have highest precedence.
 Constrained patterns like `@pattern f(x, y where y > x)` have intermediate precedence. For instance, the above function
 `foo` has a function body like
-```
+```julia
 foo(args...) = @match args begin
     (Expr(:call, [:+, a, b]),)          => a * b
     ((x,) where x isa String || x > 1,) => x * x
