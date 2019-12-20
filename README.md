@@ -1,3 +1,13 @@
+To install, simply type
+```
+] add https://github.com/MasonProtter/PatternDispatch.jl.git
+```
+or
+```julia
+using Pkg; pkg"add https://github.com/MasonProtter/PatternDispatch.jl.git"
+```
+at the julia REPL.
+
 # PatternDispatch.jl
 
 PatternDispatch.jl offers pattern matching through [Rematch.jl](https://github.com/RelationalAI-oss/Rematch.jl) but with
@@ -13,6 +23,17 @@ using PatternDispatch
 julia> fib(10)
 55
 ```
+Now suppose I later decide I don't want a stack overflow every time I accidentally call `fib(-1)`, then I can just define
+```julia
+@pattern fib(x where x < 0) = error("Fib only takes positive inputs.")
+
+```
+```julia
+julia> fib(-1)
+ERROR: Fib only takes positive inputs.
+```
+
+
 Any valid Rematch.jl pattern can be used in a `@pattern` function signature, so you can write powerful destructuring code like
 ```julia
 @pattern foo(x) = x
