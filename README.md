@@ -79,7 +79,7 @@ where `@match` is from the Rematch.jl package.
 
 ## Known Gotcha's
 - Due to an unfortunate implementation detail, pattern functions are all `@generated` functions, meaning that they
-cannot cannot return closures (there are workarounds to this, see the 'closures' testset in `tests/runteses.jl`).
+cannot return closures (there are workarounds to this, see the 'closures' testset in `tests/runteses.jl`).
 - If you define a `@pattern` function in a local scope, you may get errors if you reference variables defined
 in that scope, even the pattern function itself [ref](https://github.com/JuliaLang/julia/issues/34162).
 - Any `@pattern` functions always have the signature `f(args...) = @match args begin ... end`, so any non-pattern methods
