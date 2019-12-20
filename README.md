@@ -61,3 +61,6 @@ where `@match` is from the Rematch.jl package.
 cannot cannot return closures (there are workarounds to this, see the 'closures' testset in `tests/runteses.jl`).
 - If you define a `@pattern` function in a local scope, you may get errors if you reference variables defined
 in that scope, even the pattern function itself [ref](https://github.com/JuliaLang/julia/issues/34162).
+- Any `@pattern` functions always have the signature `f(args...) = @match args begin ... end`, so any non-pattern methods
+will take priority over pattern methods. If you define a `@pattern` method on a function you do not own, you will be
+committing type piracy.
