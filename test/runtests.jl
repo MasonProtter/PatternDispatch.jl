@@ -97,3 +97,13 @@ end
     @pattern bar(x) = x
     @test bar(1) == 1
 end
+
+
+@pattern Base.sin(x)               = sin(x)
+@pattern Base.sin(x where x == 2π) = 0.0
+
+@testset "Avoiding piracy   " begin
+    @test sin(2π)          != 0.0
+    @test sin(Pattern, 2π) == 0.0
+    @test sin(52.3)        == sin(Pattern, 52.3)
+end

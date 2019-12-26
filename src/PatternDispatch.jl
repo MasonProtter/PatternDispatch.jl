@@ -1,6 +1,6 @@
 module PatternDispatch
 
-export @pattern, @match
+export @pattern, Pattern
 
 using Rematch: @match
 using MacroTools: splitdef, striplines, postwalk
@@ -37,13 +37,13 @@ macro pattern(fdef)
     qf = Meta.quot(f)
     eargs = esc(:args)
 
-    startingfdef = Meta.quot(:(@match args begin
+    startingfdef = Meta.quot(:(PatternDispatch.@match args begin
                                    $matcher
                                end) |> striplines)
     gname = gensym()
     quote
         if !(@isdefined($f)) && $(d[:name] == f)
-            function $ef($eargs...) end
+            $ef($eargs...) = $ef(Pattern, $eargs...)
         end
         if !haskey(fdefs, $ef)
             fdefs[$ef] = $startingfdef
@@ -51,7 +51,7 @@ macro pattern(fdef)
             pushfirst!(fdefs[$ef].args[4].args, $qmatcher)
         end
         sort!(fdefs[$ef].args[4].args, by=(x->(Pattern(x.args[2]))))
-        @generated $(emf)($(eargs)...) = fdefs[$ef]
+        @generated $(emf)(::Type{Pattern}, $(eargs)...) = fdefs[$ef]
         $ef
     end 
 end
